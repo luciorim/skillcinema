@@ -2,6 +2,7 @@ package com.sdu.skillcinema.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -10,12 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,16 +32,30 @@ fun MainScreen() {
     Scaffold(
         modifier = Modifier.background(Color.White),
         bottomBar = {
-            BottomAppBar(
+            Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
-                containerColor = Color.White,
-
+                    .fillMaxWidth()
+                    .shadow(
+                        elevation = 20.dp,
+                        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+                    )
+                    .background(Color.White)
             ) {
-                BottomNav(navController = navController)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    BottomAppBar(
+                        modifier = Modifier
+                            .wrapContentSize(),
+                        containerColor = Color.White,
+
+                        ) {
+                        BottomNav(navController = navController)
+                    }
+                }
             }
         },
-        contentWindowInsets = WindowInsets.navigationBars
     ) {
         NavGraph(navHostController = navController)
     }
