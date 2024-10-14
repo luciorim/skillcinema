@@ -1,6 +1,5 @@
 package com.sdu.skillcinema.data
 
-import androidx.compose.ui.res.painterResource
 import com.sdu.skillcinema.data.models.CinemaList
 import com.sdu.skillcinema.data.models.CinemaListItem
 

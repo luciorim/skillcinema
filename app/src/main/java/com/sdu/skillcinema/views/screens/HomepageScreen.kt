@@ -1,11 +1,9 @@
 package com.sdu.skillcinema.views.screens
 
-import android.provider.ContactsContract.Data
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,22 +11,24 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sdu.skillcinema.data.DataProvider
-import com.sdu.skillcinema.data.models.CinemaListItem
 import com.sdu.skillcinema.views.models.CinemaListItemModel
 import com.sdu.skillcinema.views.models.GenreAndAllModel
 
 @Composable
 fun Homepage() {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+
     ) {
         Column(
-            modifier = Modifier.padding(top = 97.dp, start = 24.dp)
+            modifier = Modifier.padding(top = 50.dp, start = 24.dp)
         ) {
             Text(
                 text = "Skillcinema",
@@ -37,7 +37,7 @@ fun Homepage() {
 
             LazyColumn(
                 modifier = Modifier
-                    .padding(top = 16.dp, bottom = 100.dp)
+                    .padding(top = 16.dp, bottom = 80.dp)
 
             ) {
                 items(DataProvider.Films) { list ->

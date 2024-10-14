@@ -52,7 +52,7 @@ fun BottomNav(
                         painter = painterResource(item.iconId),
                         contentDescription = "icon",
                         modifier = Modifier
-                            .size(24.dp)
+                            .size(18.dp)
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
