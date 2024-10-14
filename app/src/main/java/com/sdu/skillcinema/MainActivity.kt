@@ -10,30 +10,25 @@ import androidx.activity.enableEdgeToEdge
 import com.sdu.skillcinema.onboarding.OnboardingScreen
 import com.sdu.skillcinema.navigation.MainScreen
 import com.sdu.skillcinema.ui.theme.SkillcinemaTheme
-
 class MainActivity : ComponentActivity() {
-
-    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        preferences = getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
-        val onboardingComplete = preferences.getBoolean("onboarding_complete", false)
 
         setContent {
             SkillcinemaTheme {
-                if (!onboardingComplete) {
-                    OnboardingScreen {
-                        completeOnboarding()
-                    }
-                } else {
-                    MainScreen()
+                OnboardingScreen {
+                    startMainScreen()
                 }
             }
         }
     }
 
-    private fun completeOnboarding() {
-        preferences.edit().putBoolean("onboarding_complete", true).apply()
+    private fun startMainScreen() {
+        setContent {
+            SkillcinemaTheme {
+                MainScreen()
+            }
+        }
     }
 }

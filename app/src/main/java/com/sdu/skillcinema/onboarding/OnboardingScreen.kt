@@ -37,7 +37,9 @@ fun OnboardingScreen(onComplete: () -> Unit) {
             TopAppBar(
                 title = { Text(text = "Skillcinema") },
                 actions = {
-                    TextButton(onClick = onComplete) {
+                    TextButton(onClick = {
+                        onComplete()
+                    }) {
                         Text(text = "Пропустить", color = Color.Gray)
                     }
                 }
