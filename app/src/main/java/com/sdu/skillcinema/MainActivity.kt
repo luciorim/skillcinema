@@ -1,25 +1,39 @@
 package com.sdu.skillcinema
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.sdu.skillcinema.onboarding.OnboardingScreen
 import com.sdu.skillcinema.navigation.MainScreen
 import com.sdu.skillcinema.ui.theme.SkillcinemaTheme
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var preferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        preferences = getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
+        val onboardingComplete = preferences.getBoolean("onboarding_complete", false)
+
         setContent {
-            MainScreen()
+            SkillcinemaTheme {
+                if (!onboardingComplete) {
+                    OnboardingScreen {
+                        completeOnboarding()
+                    }
+                } else {
+                    MainScreen()
+                }
+            }
         }
+    }
+
+    private fun completeOnboarding() {
+        preferences.edit().putBoolean("onboarding_complete", true).apply()
     }
 }
