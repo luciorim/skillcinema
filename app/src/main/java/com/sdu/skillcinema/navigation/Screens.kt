@@ -7,17 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
-@Composable
-fun Homepage() {
-    Text (
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentHeight(),
-        text = "HomePage",
-        textAlign = TextAlign.Center
-    )
-}
-
 
 @Composable
 fun Search() {
