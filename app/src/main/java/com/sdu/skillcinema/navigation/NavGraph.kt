@@ -11,7 +11,8 @@ fun NavGraph(
     navHostController: NavHostController
 ) {
     NavHost(
-        navController = navHostController, startDestination = "homepage") { //todo: change to constants
+        navController = navHostController, startDestination = "homepage"
+    ) { //todo: change to constants
         composable("homepage") {
             Homepage()
         }

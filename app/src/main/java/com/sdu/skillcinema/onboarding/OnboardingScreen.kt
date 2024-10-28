@@ -34,7 +34,6 @@ import com.sdu.skillcinema.ui.theme.SkillcinemaTheme
 @Composable
 fun OnboardingScreen(onComplete: () -> Unit) {
     val pagerState = rememberPagerState(initialPage = 0, pageCount = {3})
-
     Scaffold(
         modifier = Modifier.fillMaxSize().padding(vertical = 26.dp),
         topBar = {
@@ -58,8 +57,6 @@ fun OnboardingScreen(onComplete: () -> Unit) {
                 HorizontalPager(
                     state = pagerState,
                     modifier = Modifier.weight(1f)
-
-
                 ) { page ->
                     when (page) {
                         0 -> OnboardingPage(
@@ -83,7 +80,6 @@ fun OnboardingScreen(onComplete: () -> Unit) {
                         .align(Alignment.Start)
                         .padding(bottom = 63.dp, start = 26.dp )
                 )
-
             }
         }
     )

@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.core.os.BuildCompat
 import com.sdu.skillcinema.onboarding.OnboardingScreen
 import com.sdu.skillcinema.navigation.MainScreen
 import com.sdu.skillcinema.ui.theme.SkillcinemaTheme
