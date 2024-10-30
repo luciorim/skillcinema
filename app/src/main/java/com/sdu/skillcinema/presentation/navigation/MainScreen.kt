@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.navigation
+package com.sdu.skillcinema.presentation.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

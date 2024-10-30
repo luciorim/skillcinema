@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.ui.theme
+package com.sdu.skillcinema.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

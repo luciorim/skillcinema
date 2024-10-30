@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.navigation
+package com.sdu.skillcinema.presentation.navigation
 
 import androidx.annotation.DrawableRes
 import com.sdu.skillcinema.R

@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.onboarding
+package com.sdu.skillcinema.presentation.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sdu.skillcinema.R
-import com.sdu.skillcinema.ui.theme.SkillcinemaTheme
+import com.sdu.skillcinema.presentation.ui.theme.SkillcinemaTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

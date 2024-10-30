@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.navigation
+package com.sdu.skillcinema.presentation.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize

@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.views.screens
+package com.sdu.skillcinema.presentation.views.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,8 +16,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sdu.skillcinema.data.DataProvider
-import com.sdu.skillcinema.views.models.CinemaListItemModel
-import com.sdu.skillcinema.views.models.GenreAndAllModel
+import com.sdu.skillcinema.presentation.views.models.CinemaListItemModel
+import com.sdu.skillcinema.presentation.views.models.GenreAndAllModel
 
 @Composable
 fun Homepage() {

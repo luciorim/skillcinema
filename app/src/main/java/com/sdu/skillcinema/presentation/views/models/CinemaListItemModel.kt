@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.views.models
+package com.sdu.skillcinema.presentation.views.models
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

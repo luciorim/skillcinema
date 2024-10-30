@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.ui.theme
+package com.sdu.skillcinema.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
