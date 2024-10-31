@@ -31,7 +31,38 @@ object DataProvider {
                     genre = "драма",
                     rating = 7.8,
 
-                )
+                ),
+                CinemaListItem(
+                    title = "Близкие",
+                    genre = "драма",
+                    rating = 7.8,
+
+                    ),
+                CinemaListItem(
+                    title = "Близкие",
+                    genre = "драма",
+                    rating = 7.8,
+
+                    ),
+                CinemaListItem(
+                    title = "Близкие",
+                    genre = "драма",
+                    rating = 7.8,
+
+                    ),
+                CinemaListItem(
+                    title = "Близкие",
+                    genre = "драма",
+                    rating = 7.8,
+
+                    ),
+                CinemaListItem(
+                    title = "Близкие",
+                    genre = "драма",
+                    rating = 7.8,
+
+                    ),
+
             )
         ),
         CinemaList(
