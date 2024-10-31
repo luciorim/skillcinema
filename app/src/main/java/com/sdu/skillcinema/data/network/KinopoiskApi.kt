@@ -15,7 +15,7 @@ interface KinopoiskApi {
     @GET("/api/v2.2/films/collections")
     @Headers("X-API-KEY: ${BuildConfig.KINOPOISK_APIKEY}")
     suspend fun getMoviesByCollection(
-        @Query("page") page: Int,
+//        @Query("page") page: Int,
         @Query("type") type: MoviesCollectionType
     ): CollectionMovieDto
 

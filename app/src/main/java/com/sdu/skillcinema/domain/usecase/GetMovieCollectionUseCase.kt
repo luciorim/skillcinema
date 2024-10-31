@@ -15,14 +15,13 @@ class GetMovieCollectionUseCase @Inject constructor(
 ){
     operator fun invoke(
         type: MoviesCollectionType,
-        page: Int
     ): Flow<Resource<List<Movie>>> = flow {
 
         try {
 
             emit(Resource.Loading())
 
-            val movies = repository.getMoviesByCollection(type, page).items
+            val movies = repository.getMoviesByCollection(type).items
 
             emit(Resource.Success(movies))
 

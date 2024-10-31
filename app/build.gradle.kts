@@ -97,4 +97,7 @@ dependencies {
 
     implementation("com.google.dagger:dagger:2.44")
     implementation("com.google.dagger:hilt-android:2.44")
+
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
 }
