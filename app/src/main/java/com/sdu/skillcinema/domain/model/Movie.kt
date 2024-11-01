@@ -8,7 +8,7 @@ data class Movie(
     val imdbId: String,
     val kinopoiskId: Int,
     val logoUrl: String,
-    val nameEn: Any,
+    val nameEn: String,
     val nameOriginal: String,
     val nameRu: String,
     val posterUrl: String,

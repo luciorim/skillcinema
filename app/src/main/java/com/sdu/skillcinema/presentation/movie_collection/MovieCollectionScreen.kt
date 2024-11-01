@@ -44,7 +44,7 @@ fun MovieCollectionScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Icon (
+                Icon ( //todo: mb change to button to return to previous page
                     painter = painterResource(id = R.drawable.ic_back),
                     contentDescription = "Back icon",
                     modifier = Modifier
@@ -53,11 +53,11 @@ fun MovieCollectionScreen(
                             horizontal = 26.dp
                         )
                 )
-                //todo: put collection type
+
                 Text(
                     modifier = Modifier
                         .align(Alignment.Center),
-                    text = "Temporary",
+                    text = "Temporary", //todo: put collection type here
                     style = TextStyle(
                         fontWeight = FontWeight.W600,
                         fontSize = 12.sp,
@@ -66,7 +66,7 @@ fun MovieCollectionScreen(
                     )
                 )
             }
-            //todo: check layout after connection api
+            //todo: check layout after connect api
             LazyVerticalGrid (
                 columns = GridCells.Fixed(2),
                 modifier = Modifier
@@ -82,7 +82,7 @@ fun MovieCollectionScreen(
                     MovieItem(
                         movie = movie,
                         onItemClick = {
-                            //todo open movie detail page
+                            //todo open movie detail page (later)
                         }
                     )
                 }
