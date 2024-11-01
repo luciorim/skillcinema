@@ -30,6 +30,7 @@ fun CinemaListItemModel(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(end = 5.dp)
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(22.dp)

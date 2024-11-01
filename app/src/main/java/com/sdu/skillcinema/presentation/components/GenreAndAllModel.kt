@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.presentation.views.models
+package com.sdu.skillcinema.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

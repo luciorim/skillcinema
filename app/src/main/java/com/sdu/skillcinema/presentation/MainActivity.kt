@@ -3,6 +3,7 @@ package com.sdu.skillcinema.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.sdu.skillcinema.presentation.movie_collection.MovieCollectionScreen
 import com.sdu.skillcinema.presentation.onboarding.OnboardingScreen
 import com.sdu.skillcinema.presentation.navigation.MainScreen
 import com.sdu.skillcinema.presentation.ui.theme.SkillcinemaTheme
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
                     startMainScreen()
                 }
             }
+
         }
     }
 

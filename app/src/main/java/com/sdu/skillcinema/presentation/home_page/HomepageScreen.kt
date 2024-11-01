@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.presentation.views.screens
+package com.sdu.skillcinema.presentation.home_page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,13 +16,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sdu.skillcinema.data.DataProvider
 import com.sdu.skillcinema.presentation.views.models.CinemaListItemModel
-import com.sdu.skillcinema.presentation.views.models.GenreAndAllModel
+import com.sdu.skillcinema.presentation.components.GenreAndAllModel
+import com.sdu.skillcinema.presentation.components.MovieItem
+import com.sdu.skillcinema.presentation.movie_collection.HomepageState
+import com.sdu.skillcinema.presentation.movie_collection.HomepageViewModel
 
-@Preview(showBackground = true)
 @Composable
-fun Homepage() {
+fun Homepage(
+    homepageViewModel: HomepageViewModel = viewModel()
+) {
+
+    val state = homepageViewModel.state.value
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -37,26 +45,29 @@ fun Homepage() {
                 style = TextStyle(fontSize = 22.sp)
             )
 
-            LazyColumn(
-                modifier = Modifier
-                    .padding(top = 16.dp, bottom = 80.dp)
-
-            ) {
-                items(DataProvider.Films) { list ->
-                    GenreAndAllModel(
-                        text = list.title
-                    )
+//            LazyColumn(
+//                modifier = Modifier
+//                    .padding(top = 16.dp, bottom = 80.dp)
+//
+//            ) {
+//                items() { list ->
+//                    GenreAndAllModel(
+//                        text = list.title
+//                    )
                     LazyRow(
                         modifier = Modifier.padding(bottom = 16.dp)
                     ) {
-                        items(list.list) { item ->
-                            CinemaListItemModel(
-                                data = item
+                        items(state.movies) { item ->
+                            MovieItem(
+                                movie = item,
+                                onItemClick = {
+
+                                }
                             )
                         }
                     }
-                }
-            }
+//                }
+//            }
         }
     }
 }
