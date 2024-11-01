@@ -1,5 +1,3 @@
-import java.io.FileInputStream
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,10 +7,6 @@ plugins {
 android {
     namespace = "com.sdu.skillcinema"
     compileSdk = 35
-
-    val file = rootProject.file("local.properties")
-    val properties = Properties()
-    properties.load(FileInputStream(file))
 
     defaultConfig {
         applicationId = "com.sdu.skillcinema"
@@ -26,11 +20,6 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField(
-            "String",
-            "KINOPOISK_APIKEY",
-            properties.getProperty("KINOPOISK_APIKEY")
-        )
     }
 
     buildFeatures {
