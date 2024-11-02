@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sdu.skillcinema.presentation.views.screens.Homepage
+import com.sdu.skillcinema.presentation.home_page.HomePageScreen
+import com.sdu.skillcinema.presentation.movie_collection.MovieCollectionScreen
 
 @Composable
 fun NavGraph(
@@ -14,7 +15,7 @@ fun NavGraph(
         navController = navHostController, startDestination = "homepage"
     ) { //todo: change to constants
         composable("homepage") {
-            Homepage()
+            HomePageScreen(navController = navHostController)
         }
 
         composable("search") {
@@ -23,6 +24,10 @@ fun NavGraph(
 
         composable("profile") {
             Profile()
+        }
+
+            composable("movieCollection/{type}") { backStackEntry ->
+            MovieCollectionScreen(navController = navHostController)
         }
     }
 }

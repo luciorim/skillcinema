@@ -4,7 +4,8 @@ import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 
 data class MovieCollectionState (
-    val isLoading: Boolean = false,
-    val movies: List<Movie> = emptyList(),
-    val error: String = ""
+    var isLoading: Boolean = false,
+    var movies: List<Movie> = emptyList(),
+    var error: String = "",
+    var collectionType: MoviesCollectionType? = null
 )

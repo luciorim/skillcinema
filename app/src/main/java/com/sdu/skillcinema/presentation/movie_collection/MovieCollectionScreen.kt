@@ -11,9 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,72 +26,97 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.sdu.skillcinema.R
+import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
+import com.sdu.skillcinema.domain.model.enums.convertCollectionType
 import com.sdu.skillcinema.presentation.components.MovieItem
 
 @Composable
 fun MovieCollectionScreen(
     navController: NavController,
-    movieCollectionViewModel: MovieCollectionViewModel
+    viewModel: MovieCollectionViewModel = viewModel()
 ) {
 
-    val state = movieCollectionViewModel.state.value
+    val state by viewModel.state.collectAsState()
 
     Box (
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        Column {
-            Box (
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Icon ( //todo: mb change to button to return to previous page
-                    painter = painterResource(id = R.drawable.ic_back),
-                    contentDescription = "Back icon",
-                    modifier = Modifier
-                        .padding(
-                            vertical = 16.dp,
-                            horizontal = 26.dp
-                        )
-                )
 
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.Center),
-                    text = "Temporary", //todo: put collection type here
-                    style = TextStyle(
-                        fontWeight = FontWeight.W600,
-                        fontSize = 12.sp,
-                        lineHeight = 13.2.sp,
-                        color = Color(0xFF272727)
-                    )
-                )
-            }
-            //todo: check layout after connect api
-            LazyVerticalGrid (
-                columns = GridCells.Fixed(2),
+        if ( state.isLoading ) {
+
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+
+        } else if ( state.error.isNotBlank() ) {
+
+            Text(
+                text = state.error,
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(
-                        start = 61.dp,
-                        end = 61.dp
-                    ),
-                horizontalArrangement = Arrangement.Center,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(state.movies) { movie ->
-                    MovieItem(
-                        movie = movie,
-                        onItemClick = {
-                            //todo open movie detail page (later)
-                        }
+                    .align(Alignment.Center)
+            )
+
+        } else {
+
+            Column {
+                Box (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    IconButton(
+                        onClick = { navController.popBackStack() },
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                    ) {
+                        Icon (
+                            painter = painterResource(id = R.drawable.ic_back),
+                            contentDescription = "Back icon",
+                        )
+                    }
+
+                    Text(
+                        modifier = Modifier
+                            .align(Alignment.Center),
+                        text = convertCollectionType(
+                            state.collectionType ?:
+                            MoviesCollectionType.TOP_250_MOVIES
+                        ),
+                        style = TextStyle(
+                            fontWeight = FontWeight.W600,
+                            fontSize = 12.sp,
+                            lineHeight = 13.2.sp,
+                            color = Color(0xFF272727)
+                        )
                     )
                 }
+
+                LazyVerticalGrid (
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(
+                            start = 61.dp,
+                            end = 61.dp
+                        ),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(state.movies) { movie ->
+                        MovieItem(
+                            movie = movie,
+                            onItemClick = {/*TODO*/}
+                        )
+                    }
+                }
+
             }
 
         }
+
     }
 }

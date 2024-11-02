@@ -1,61 +1,58 @@
 package com.sdu.skillcinema.presentation.movie_collection
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sdu.skillcinema.common.RequestParams
-import com.sdu.skillcinema.common.Resource
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
-import com.sdu.skillcinema.domain.usecase.GetMovieCollectionUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
+import com.sdu.skillcinema.domain.model.enums.getMoviesCollectionTypeFromString
+import com.sdu.skillcinema.domain.usecase.MovieUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
-@HiltViewModel
-class MovieCollectionViewModel @Inject constructor (
-    private val getMovieCollectionUseCase: GetMovieCollectionUseCase,
-    savedStateHandle: SavedStateHandle
+class MovieCollectionViewModel(
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<MovieCollectionState>(MovieCollectionState())
-    val state: State<MovieCollectionState> = _state
+    private val _state = MutableStateFlow(MovieCollectionState())
+    val state: StateFlow<MovieCollectionState> = _state
+
+    val movieUseCase = MovieUseCase()
 
     init {
+        val typeString = savedStateHandle.get<String>("type")
 
-        val collectionType = savedStateHandle
-            .get<MoviesCollectionType>(RequestParams.MOVIE_COLLECTION_TYPE)
-
-        if (collectionType != null) {
-            getMovieCollection(collectionType)
+        val collectionType = typeString?.let { tp ->
+            getMoviesCollectionTypeFromString(tp)
         }
 
+        if (collectionType != null) {
+            getMoviesByCollection(collectionType)
+        }
     }
 
-     private fun getMovieCollection (
-         type: MoviesCollectionType
-     ) {
-         getMovieCollectionUseCase(type).onEach { result ->
-             when (result) {
+    fun getMoviesByCollection(
+        moviesCollectionType: MoviesCollectionType
+    ) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true)
 
-                 is Resource.Success -> {
-                     _state.value = MovieCollectionState(movies = result.data ?: emptyList())
-                 }
+            try {
+                var movies = movieUseCase.getFilmsByCollectionType(moviesCollectionType)
 
-                 is Resource.Loading -> {
-                    _state.value = MovieCollectionState(isLoading = true)
-                 }
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    movies = movies,
+                    collectionType = moviesCollectionType
+                )
 
-                 is Resource.Error -> {
-                    _state.value = MovieCollectionState(
-                        error = result.message ?: "An unexpected error occured "
-                    )
-                 }
-
-             }
-         }.launchIn(viewModelScope)
-     }
-
+            } catch (e: HttpException) {
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    error = e.localizedMessage ?: "An unexpected error occurred"
+                )
+            }
+        }
+    }
 }
