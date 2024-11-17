@@ -21,11 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sdu.skillcinema.domain.model.SimilarMovie
 
 @Composable
-fun SimilarFilmsListItem(similar: List<SimilarMovie>) {
+fun SimilarFilmsListItem(similar: List<SimilarMovie>, navController: NavController) {
     if (similar.isNotEmpty()) {
         Column {
             Row(
@@ -42,7 +43,7 @@ fun SimilarFilmsListItem(similar: List<SimilarMovie>) {
 
             ) {
                 items(similar) { similarFilm ->
-                    SimilarCard(similarFilm)
+                    SimilarCard(similarFilm, onClick = {navController.navigate("detailMovie/${similarFilm.filmId}")})
                 }
             }
         }
@@ -51,13 +52,13 @@ fun SimilarFilmsListItem(similar: List<SimilarMovie>) {
 }
 
 @Composable
-fun SimilarCard(similarFilm: SimilarMovie) {
+fun SimilarCard(similarFilm: SimilarMovie, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .width(111.dp)
             .height(194.dp)
             .clickable {
-
+                onClick()
             }
     ) {
         Box(
