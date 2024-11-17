@@ -1,6 +1,7 @@
 package com.sdu.skillcinema.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +31,7 @@ import com.sdu.skillcinema.domain.model.Movie
 @Composable
 fun MovieItem(
     movie: Movie,
-    onItemClick: (Movie) -> Unit
+    onItemClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -46,7 +47,10 @@ fun MovieItem(
             modifier = Modifier
                 .align(Alignment.Center)
         ) {
-            Box {
+            Box (
+                modifier = Modifier
+                    .clickable { onItemClick() }
+            ) {
                 AsyncImage(
                     modifier = Modifier
                         .clip(RoundedCornerShape(5.dp))

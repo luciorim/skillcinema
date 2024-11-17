@@ -20,7 +20,7 @@ import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 @Composable
 fun GenreAndAllModel(
     text: String,
-    type: MoviesCollectionType,
+    navPath: String,
     navController: NavController
 ){
     Row(
@@ -34,11 +34,16 @@ fun GenreAndAllModel(
     ){
         Text(
             text = text,
-            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 15.sp),
+            style = TextStyle(
+                fontWeight = FontWeight.W600,
+                fontSize = 18.sp,
+                lineHeight = 19.8.sp
+
+            ),
         )
         TextButton(
             onClick = {
-                navController.navigate("movieCollection/$type")
+                navController.navigate(navPath)
             }
         ) {
             Text(
