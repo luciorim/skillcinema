@@ -170,7 +170,7 @@ fun FilmPageScreen(
                         } else {
                             val similarMovies = statesimilarMovie.movies
                             if (similarMovies != null){
-                                SimilarFilmsListItem(similar = similarMovies.items)
+                                SimilarFilmsListItem(similar = similarMovies.items, navController = navController)
                             }
 
                         }
