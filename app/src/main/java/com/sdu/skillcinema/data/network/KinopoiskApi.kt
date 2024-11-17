@@ -17,7 +17,7 @@ interface KinopoiskApi {
 
     @GET("/api/v2.2/films/{id}")
     @Headers("X-API-KEY: ${Constants.APIKEY}")
-    suspend fun getMovieById(
+    suspend fun getMovie(
         @Path("id") id: Int,
     ): Movie
 
