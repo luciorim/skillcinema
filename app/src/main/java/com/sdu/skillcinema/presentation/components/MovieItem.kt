@@ -1,6 +1,7 @@
 package com.sdu.skillcinema.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,7 +41,8 @@ fun MovieItem(
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(22.dp)
-            ),
+            )
+            .clickable { onItemClick(movie) }
     ){
         Column(
             modifier = Modifier
