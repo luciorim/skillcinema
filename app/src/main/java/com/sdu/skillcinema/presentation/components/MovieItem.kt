@@ -41,7 +41,8 @@ fun MovieItem(
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(22.dp)
-            ),
+            )
+            .clickable { onItemClick(movie) }
     ){
         Column(
             modifier = Modifier

@@ -81,7 +81,7 @@ fun HomePageScreen(
                             items (value.take(7)) { mov ->
                                 MovieItem(
                                     movie = mov,
-                                    onItemClick = {/*TODO*/}
+                                    onItemClick = { navController.navigate("detailMovie/${mov.kinopoiskId}")}
                                 )
                             }
                         }
