@@ -6,7 +6,7 @@ import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 
 interface MovieRepository {
 
-    suspend fun getMovieById(id: Int): Movie
+    suspend fun getMovie(id: Int): Movie
 
     suspend fun getMoviesByCollection(type: MoviesCollectionType): CollectionMovieDto
 

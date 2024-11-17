@@ -12,8 +12,8 @@ class MovieRepositoryImpl : MovieRepository {
 
     private val api = retrofit.create(KinopoiskApi::class.java)
 
-    override suspend fun getMovieById(id: Int): Movie {
-        return api.getMovieById(id)
+    override suspend fun getMovie(id: Int): Movie {
+        return api.getMovie(id)
     }
 
     override suspend fun getMoviesByCollection(
