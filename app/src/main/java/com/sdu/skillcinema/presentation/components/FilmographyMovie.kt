@@ -20,19 +20,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sdu.skillcinema.domain.model.Movie
 
 @Composable
 fun FilmographyMovie(
-    movie: Movie
+    movie: Movie,
+    navController: NavController
 ) {
-
     Row (
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 26.dp)
             .background(Color.White)
+            .clickable { navController.navigate("detailMovie/${movie.kinopoiskId}") }
     ) {
         Box(
             modifier = Modifier.clickable { /*TODO*/ }

@@ -38,7 +38,7 @@ fun FilmPageScreen(
     movieViewModel: FilmPageViewModel = viewModel(),
     actorViewModel: FilmPageViewModel = viewModel(),
     imageViewModel: FilmPageViewModel = viewModel(),
-    similarMovieViewModel: FilmPageViewModel = viewModel()
+    similarMovieViewModel: FilmPageViewModel = viewModel(),
 ) {
     val stateMovie by movieViewModel.stateMovie.collectAsState()
     val stateActor by actorViewModel.stateActors.collectAsState()
@@ -127,8 +127,8 @@ fun FilmPageScreen(
                                 }
                             }
                             if (actors != null){
-                                ActorsList(stuffs, "В фильме снимались",4)
-                                ActorsList(directors, "Над фильмом работали",2)
+                                ActorsList(stuffs, "В фильме снимались",4, navController)
+                                ActorsList(directors, "Над фильмом работали",2, navController)
                             }
 
                         }

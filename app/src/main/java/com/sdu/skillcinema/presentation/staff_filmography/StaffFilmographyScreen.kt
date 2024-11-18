@@ -126,7 +126,7 @@ fun StaffFilmographyScreen(
                     .padding(top = 24.dp)
             ) {
                 items(state.movies.get(state.professionKey)!!) { movie ->
-                    FilmographyMovie(movie = movie)
+                    FilmographyMovie(movie = movie, navController = navController)
                 }
             }
 

@@ -2,6 +2,7 @@ package com.sdu.skillcinema.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
@@ -31,10 +32,8 @@ fun NavGraph(
             Profile()
         }
 
-        composable("movieCollection/{type}") {
-            MovieCollectionScreen(navController = navHostController)
         composable("movieCollection/{type}") { backStackEntry ->
-        MovieCollectionScreen(navController = navHostController)
+            MovieCollectionScreen(navController = navHostController)
         }
 
         composable("staffDetails/{staffId}") {
@@ -49,9 +48,9 @@ fun NavGraph(
             StaffFilmographyScreen(navController = navHostController)
         }
 
-        composable("detailMovie/{id}", arguments = listOf(navArgument("id"){ type = NavType.IntType})
-        ) { backStackEntry ->
+        composable("detailMovie/{id}"){
             FilmPageScreen(navController = navHostController)
         }
+
     }
 }

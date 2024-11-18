@@ -56,7 +56,6 @@ class StaffFilmographyViewModel(
                     initialKey = professionKey
                 }
 
-                println(moviesMap)
 
                 _state.value = StaffFilmographyState(
                     movies = moviesMap,

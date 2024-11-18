@@ -37,7 +37,7 @@ class StaffDetailMovieViewModel(
                 var staff = staffUseCase.getStuffDetailsById(id)
                 val staffMovies = mutableListOf<Movie>()
 
-                for (film in staff.films) {
+                for (film in staff.films.take(10)) {
                     var mov = movieUseCase.getFilmById(film.filmId)
                     staffMovies.add(mov)
                 }

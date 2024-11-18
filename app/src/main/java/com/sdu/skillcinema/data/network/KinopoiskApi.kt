@@ -6,7 +6,9 @@ import com.sdu.skillcinema.data.network.dto.CollectionMovieDto
 import com.sdu.skillcinema.domain.model.Actors
 import com.sdu.skillcinema.domain.model.DetailMovie
 import com.sdu.skillcinema.domain.model.Images
+import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.domain.model.SimilarMovies
+import com.sdu.skillcinema.domain.model.Staff
 import com.sdu.skillcinema.domain.model.enums.ImagesType
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 import retrofit2.Retrofit
@@ -43,11 +45,11 @@ interface KinopoiskApi {
         @Query("filmId") filmId: Int,
     ): List<Actors>
 
-//    @GET("/api/v2.2/staff/{id}")
-//    @Headers("X-API-KEY: ${Constants.APIKEY}")
-//    suspend fun getActorsById(
-//        @Path("id") id: Int,
-//    ): Actors
+    @GET("/api/v1/staff/{id}")
+    @Headers("X-API-KEY: ${Constants.APIKEY}")
+    suspend fun getStaffDetails(
+        @Path("id") id: Int,
+    ): Staff
 
     @GET("/api/v2.2/films/{id}/similars")
     @Headers("X-API-KEY: ${Constants.APIKEY}")

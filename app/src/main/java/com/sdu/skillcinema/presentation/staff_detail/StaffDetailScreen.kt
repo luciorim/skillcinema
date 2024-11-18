@@ -135,7 +135,7 @@ fun StaffDetailScreen(
                         items(state.staffMovies.take(7)) { mov ->
                             MovieItem(
                                 movie = mov,
-                                onItemClick = {/*TODO*/}
+                                onItemClick = { navController.navigate("detailMovie/${mov.kinopoiskId}") }
                             )
                         }
                     }
@@ -162,7 +162,7 @@ fun StaffDetailScreen(
                             Text(
                                 modifier = Modifier
                                     .padding(top = 8.dp),
-                                text = state.staffMovies.size.toString(),
+                                text = state.staff?.films?.size.toString(),
                                 style = TextStyle(
                                     fontWeight = FontWeight.W400,
                                     fontSize = 12.sp,

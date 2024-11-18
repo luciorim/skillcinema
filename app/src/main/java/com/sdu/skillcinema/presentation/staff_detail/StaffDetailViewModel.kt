@@ -38,14 +38,14 @@ class StaffDetailViewModel(
                 var staff = staffUseCase.getStuffDetailsById(id)
                 val staffMovies = mutableListOf<Movie>()
 
-                for (film in staff.films) {
+                for (film in staff.films.take(7)) {
                     var mov = movieUseCase.getFilmById(film.filmId)
                     staffMovies.add(mov)
                 }
 
                 _state.value = StaffDetailState(
                     staff = staff,
-                    staffMovies = staffMovies
+                    staffMovies = staffMovies,
                 )
 
             } catch (e: HttpException) {

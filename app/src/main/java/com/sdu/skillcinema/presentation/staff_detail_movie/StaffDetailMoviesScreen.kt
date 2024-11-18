@@ -105,7 +105,7 @@ fun StaffDetailMoviesScreen(
                     items(state.staffMovies) { movie ->
                         MovieItem(
                             movie = movie,
-                            onItemClick = {/*TODO*/}
+                            onItemClick = { navController.navigate("detailMovie/${movie.kinopoiskId}}") }
                         )
                     }
                 }
