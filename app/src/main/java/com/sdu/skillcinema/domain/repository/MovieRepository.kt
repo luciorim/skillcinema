@@ -1,6 +1,7 @@
 package com.sdu.skillcinema.domain.repository
 
 import com.sdu.skillcinema.data.network.dto.CollectionMovieDto
+import com.sdu.skillcinema.domain.model.Movie
 
 import com.sdu.skillcinema.domain.model.Actors
 import com.sdu.skillcinema.domain.model.DetailMovie
@@ -9,6 +10,8 @@ import com.sdu.skillcinema.domain.model.SimilarMovies
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 
 interface MovieRepository {
+
+    suspend fun getMovie(id: Int): Movie
 
     suspend fun getMoviesByCollection(type: MoviesCollectionType): CollectionMovieDto
     suspend fun getMovieById(id: Int): DetailMovie

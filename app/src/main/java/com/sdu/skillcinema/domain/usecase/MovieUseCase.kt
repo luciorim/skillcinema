@@ -13,6 +13,10 @@ class MovieUseCase {
 
     private val movieRepository = MovieRepositoryImpl()
 
+    suspend fun getFilmById(id: Int): Movie {
+        return movieRepository.getMovie(id)
+    }
+
     suspend fun getFilmsByCollectionType(
         moviesCollectionType: MoviesCollectionType
     ) : List<Movie> {

@@ -28,9 +28,8 @@ class FilmPageViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
     private val movieUseCase = MovieUseCase()
 
     init {
-        val id = savedStateHandle.get<Int>("id")
+        val id: Int? = savedStateHandle.get<String>("id")?.toInt()
         Log.d("id", id.toString())
-
 
         if (id != null) {
             getMovieById(id)

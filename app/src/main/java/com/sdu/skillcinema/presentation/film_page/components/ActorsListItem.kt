@@ -25,12 +25,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import com.sdu.skillcinema.domain.model.Actors
 
 
 @Composable
-fun ActorsList(actors: List<Actors>, topic: String, chunkSize: Int){
+fun ActorsList(
+    actors: List<Actors>,
+    topic: String,
+    chunkSize: Int,
+    navController: NavController
+){
     if (actors.isNotEmpty()) {
         Column {
             Row(
@@ -52,7 +59,10 @@ fun ActorsList(actors: List<Actors>, topic: String, chunkSize: Int){
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         sortedActor.forEach { actor ->
-                            ActorCard(actor)
+                            ActorCard(
+                                actor =  actor,
+                                onClick = { navController.navigate("staffDetails/${actor.staffId}") }
+                            )
                         }
                     }
                 }
@@ -64,15 +74,18 @@ fun ActorsList(actors: List<Actors>, topic: String, chunkSize: Int){
 
 
 @Composable
-fun ActorCard(actor: Actors) {
+fun ActorCard(
+    actor: Actors,
+    onClick: () -> Unit
+) {
     Row(
         Modifier
             .fillMaxSize()
-            .clickable { },
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = rememberImagePainter(actor.posterUrl),
+        AsyncImage(
+            model = actor.posterUrl,
             contentDescription = "",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier

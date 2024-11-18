@@ -71,7 +71,7 @@ fun HomePageScreen(
 
                         GenreAndAllModel(
                             text = convertCollectionType(key),
-                            type = key,
+                            navPath = "movieCollection/${key}",
                             navController = navController
                         )
                         LazyRow (
@@ -94,11 +94,3 @@ fun HomePageScreen(
     }
 
 }
-
-//        if (state.error.isNotBlank()) {
-//            Text(text = "Ошибка", modifier = Modifier.align(Alignment.Center))
-//        }
-//
-//        if (state.isLoading) {
-//            Text(text = "Загрузка...", modifier = Modifier.align(Alignment.Center))
-//        }

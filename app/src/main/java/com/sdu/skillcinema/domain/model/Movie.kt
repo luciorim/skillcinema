@@ -5,7 +5,6 @@ data class Movie(
     val coverUrl: String,
     val description: String,
     val genres: List<Genre>,
-    val imdbId: String,
     val kinopoiskId: Int,
     val logoUrl: String,
     val nameEn: String,

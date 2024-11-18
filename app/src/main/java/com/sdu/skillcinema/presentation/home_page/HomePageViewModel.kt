@@ -10,7 +10,7 @@ import retrofit2.HttpException
 
 class HomePageViewModel : ViewModel() {
 
-    private val _state =  MutableStateFlow<HomePageState>(HomePageState())
+    private val _state =  MutableStateFlow(HomePageState())
     val state: StateFlow<HomePageState> = _state
 
     private val movieUseCase = MovieUseCase()

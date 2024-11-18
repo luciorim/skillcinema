@@ -27,11 +27,10 @@ import coil.compose.AsyncImage
 import com.sdu.skillcinema.R
 import com.sdu.skillcinema.domain.model.Movie
 
-//todo: its just a copy of CinemaListItemModel
 @Composable
 fun MovieItem(
     movie: Movie,
-    onItemClick: (Movie) -> Unit
+    onItemClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -42,13 +41,16 @@ fun MovieItem(
                 color = Color.White,
                 shape = RoundedCornerShape(22.dp)
             )
-            .clickable { onItemClick(movie) }
+            .clickable { onItemClick() }
     ){
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
         ) {
-            Box {
+            Box (
+                modifier = Modifier
+                    .clickable { onItemClick() }
+            ) {
                 AsyncImage(
                     modifier = Modifier
                         .clip(RoundedCornerShape(5.dp))
