@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.sdu.skillcinema.presentation.film_page.FilmPageScreen
+import com.sdu.skillcinema.presentation.gallery.GalleryPageScreen
 import com.sdu.skillcinema.presentation.home_page.HomePageScreen
 import com.sdu.skillcinema.presentation.movie_collection.MovieCollectionScreen
 import com.sdu.skillcinema.presentation.staff_detail.StaffDetailScreen
@@ -50,6 +51,10 @@ fun NavGraph(
 
         composable("detailMovie/{id}"){
             FilmPageScreen(navController = navHostController)
+        }
+
+        composable("galleryPage/{id}"){
+            GalleryPageScreen(navController = navHostController)
         }
 
     }

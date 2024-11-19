@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.graphics.Color
@@ -95,87 +96,98 @@ fun FilmPageScreen(
                         modifier = Modifier
                             .padding(horizontal = 26.dp)
                     ) {
-                        val mov = stateMovie.movie
-                        if (mov != null){
-                            MovieDescriptionItem(movie = mov)
-                        }
+                            val mov = stateMovie.movie
+                            if (mov != null) {
+                                MovieDescriptionItem(movie = mov)
+                            }
 
-                        if ( stateActor.isLoading ) {
+                            if (stateActor.isLoading) {
 
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                            )
+                                CircularProgressIndicator(
+                                    modifier = Modifier
+                                )
 
-                        } else if ( stateActor.error.isNotBlank()) {
+                            } else if (stateActor.error.isNotBlank()) {
 
-                            Text(
-                                text = stateActor.error,
-                                modifier = Modifier
+                                Text(
+                                    text = stateActor.error,
+                                    modifier = Modifier
 
-                            )
+                                )
 
-                        } else {
-                            val actors = stateActor.actor
-                            val directors = mutableListOf<Actors>()
-                            val stuffs = mutableListOf<Actors>()
+                            } else {
+                                val actors = stateActor.actor
+                                val directors = mutableListOf<Actors>()
+                                val stuffs = mutableListOf<Actors>()
 
-                            for (actor in actors) {
-                                if (actor.professionKey == "ACTOR") {
-                                    stuffs.add(actor)
-                                } else {
-                                    directors.add(actor)
+                                for (actor in actors) {
+                                    if (actor.professionKey == "ACTOR") {
+                                        stuffs.add(actor)
+                                    } else {
+                                        directors.add(actor)
+                                    }
                                 }
+                                if (actors != null) {
+                                    ActorsList(stuffs, "В фильме снимались", 4, navController)
+                                    ActorsList(directors, "Над фильмом работали", 2, navController)
+                                }
+
                             }
-                            if (actors != null){
-                                ActorsList(stuffs, "В фильме снимались",4, navController)
-                                ActorsList(directors, "Над фильмом работали",2, navController)
+
+
+
+
+                            if (stateImage.isLoading) {
+
+                                CircularProgressIndicator(
+                                    modifier = Modifier
+                                )
+
+                            } else if (stateImage.error.isNotBlank()) {
+
+                                Text(
+                                    text = stateImage.error,
+                                    modifier = Modifier
+
+                                )
+
+                            } else {
+                                val images = stateImage.gallary
+                                val movie = stateMovie.movie
+                                if (images != null && movie != null) {
+                                    GalleryListItem(images = images.items, navController, film = movie)
+                                }
+
                             }
+
+                            if (statesimilarMovie.isLoading) {
+
+                                CircularProgressIndicator(
+                                    modifier = Modifier
+                                )
+
+                            } else if (statesimilarMovie.error.isNotBlank()) {
+
+                                Text(
+                                    text = statesimilarMovie.error,
+                                    modifier = Modifier
+
+                                )
+
+                            } else {
+                                val similarMovies = statesimilarMovie.movies
+                                if (similarMovies != null) {
+                                    SimilarFilmsListItem(
+                                        similar = similarMovies.items,
+                                        navController = navController
+                                    )
+                                }
 
                         }
-                        if ( stateImage.isLoading ) {
-
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                            )
-
-                        } else if ( stateImage.error.isNotBlank()) {
-
-                            Text(
-                                text = stateImage.error,
-                                modifier = Modifier
-
-                            )
-
-                        } else {
-                            val images = stateImage.gallary
-                            if (images != null){
-                                GalleryListItem(images = images.items)
-                            }
-
-                        }
-                        if ( statesimilarMovie.isLoading ) {
-
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                            )
-
-                        } else if ( statesimilarMovie.error.isNotBlank()) {
-
-                            Text(
-                                text = statesimilarMovie.error,
-                                modifier = Modifier
-
-                            )
-
-                        } else {
-                            val similarMovies = statesimilarMovie.movies
-                            if (similarMovies != null){
-                                SimilarFilmsListItem(similar = similarMovies.items, navController = navController)
-                            }
-
-                        }
-
                     }
+
+
+
 
 
                 }
