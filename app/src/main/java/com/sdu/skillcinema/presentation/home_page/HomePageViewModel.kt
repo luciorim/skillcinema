@@ -18,13 +18,9 @@ class HomePageViewModel @Inject constructor (
     private val _state =  MutableStateFlow(HomePageState())
     val state: StateFlow<HomePageState> = _state
 
-//    private val _stateHistory = MutableStateFlow(VisitedMoviesState())
-//    val stateHistory: StateFlow<VisitedMoviesState> = _stateHistory
 
     init {
-//            getVisitedMovies()
             getAllMovies()
-
     }
 
     private fun getAllMovies() {
