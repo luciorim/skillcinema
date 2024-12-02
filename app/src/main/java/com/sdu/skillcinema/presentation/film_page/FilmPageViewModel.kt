@@ -5,31 +5,47 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sdu.skillcinema.data.entities.WatchedMovie
+import com.sdu.skillcinema.domain.dao.WatchedMovieDao
+import com.sdu.skillcinema.domain.model.DetailMovie
 import com.sdu.skillcinema.domain.usecase.MovieUseCase
 import com.sdu.skillcinema.presentation.film_page.states.ActorsState
 import com.sdu.skillcinema.presentation.film_page.states.FilmPageState
 import com.sdu.skillcinema.presentation.film_page.states.GalleryState
 import com.sdu.skillcinema.presentation.film_page.states.SimilarFilmState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class FilmPageViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
+@HiltViewModel
+class FilmPageViewModel @Inject constructor(
+    private val movieUseCase: MovieUseCase,
+    private val watchedMovieDao: WatchedMovieDao,
+    savedStateHandle: SavedStateHandle
+): ViewModel() {
+
     private val _stateMovie =  MutableStateFlow<FilmPageState>(FilmPageState())
     val stateMovie: StateFlow<FilmPageState> = _stateMovie
+
     private val _stateActors =  MutableStateFlow<ActorsState>(ActorsState())
     val stateActors: StateFlow<ActorsState> = _stateActors
+
     private val _stateGallery =  MutableStateFlow<GalleryState>(GalleryState())
     val stateGallery: StateFlow<GalleryState> = _stateGallery
+
     private val _stateSimilarFilm =  MutableStateFlow<SimilarFilmState>(SimilarFilmState())
     val stateSimilarFilm: StateFlow<SimilarFilmState> = _stateSimilarFilm
 
-    private val movieUseCase = MovieUseCase()
+    private val _isWatched = MutableStateFlow(false)
+    val isWatched: StateFlow<Boolean> = _isWatched
 
     init {
         val id: Int? = savedStateHandle.get<String>("id")?.toInt()
         Log.d("id", id.toString())
+
 
         if (id != null) {
             getMovieById(id)
@@ -47,9 +63,10 @@ class FilmPageViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
             try {
                 var movie = movieUseCase.getDetailFilm(id)
 
+                _isWatched.value = watchedMovieDao.getMovieById(id) != null
                 _stateMovie.value = _stateMovie.value.copy(
                     isLoading = false,
-                    movie = movie
+                    movie = movie,
                 )
             } catch (e: HttpException) {
                 _stateMovie.value = _stateMovie.value.copy(
@@ -119,4 +136,29 @@ class FilmPageViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
             }
         }
     }
+
+    fun insertMovieToWatched(movie: DetailMovie) {
+        viewModelScope.launch {
+            var watchedMovie = WatchedMovie(
+                movieId = movie.kinopoiskId,
+                posterUrl = movie.posterUrl,
+                name = movie.nameEn ?: movie.nameRu ?: "Unknown Name",
+                rating = movie.ratingKinopoisk,
+                genre = movie.genres.get(0).genre,
+                visitedAt = System.currentTimeMillis()
+            )
+            Log.d("INSERT", "insertMovieToWatched: "+ watchedMovie)
+            watchedMovieDao.insert(watchedMovie)
+            _isWatched.value = true
+        }
+    }
+
+    fun deleteMovieFromWatched(id: Int) {
+        viewModelScope.launch {
+            watchedMovieDao.deleteById(id)
+            _isWatched.value = false
+            Log.d("DELETE", "id: " + id)
+        }
+    }
+
 }

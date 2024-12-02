@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.sdu.skillcinema.domain.model.enums.convertCollectionType
@@ -28,7 +29,7 @@ import com.sdu.skillcinema.presentation.components.GenreAndAllModel
 
 @Composable
 fun HomePageScreen(
-    viewModel: HomePageViewModel = viewModel(),
+    viewModel: HomePageViewModel = hiltViewModel(),
     navController: NavController
 ) {
     val state by viewModel.state.collectAsState()

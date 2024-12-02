@@ -26,11 +26,13 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import com.sdu.skillcinema.R
 import com.sdu.skillcinema.domain.model.DetailMovie
+import com.sdu.skillcinema.presentation.film_page.FilmPageViewModel
 
 @Composable
 fun DetailMovieItem(
     movie: DetailMovie,
-
+    isWatched: Boolean,
+    movieViewModel: FilmPageViewModel
 ){
         Box(
             modifier = Modifier
@@ -146,7 +148,6 @@ fun DetailMovieItem(
                     ),
                     modifier = Modifier.padding(bottom = 3.dp)
                 )
-
                 Row(
                     modifier = Modifier
                         .padding(top = 10.dp),
@@ -155,17 +156,21 @@ fun DetailMovieItem(
                 ){
                     Icon(contentDescription = "", tint = Color.Unspecified, painter = painterResource(R.drawable.icon__2_), modifier = Modifier.clickable {  })
                     Icon(contentDescription = "", tint = Color.Unspecified, painter = painterResource(R.drawable.icons), modifier = Modifier.clickable {  })
-                    Icon(contentDescription = "", tint = Color.Unspecified, painter = painterResource(R.drawable.icons__1_), modifier = Modifier.clickable {  })
+                    Icon(
+                        contentDescription = "",
+                        tint = if (isWatched) Color(0xFF3D3BFF) else Color.Unspecified,
+                        painter = painterResource(R.drawable.icons__1_),
+                        modifier = Modifier.clickable {
+                            if(isWatched) {
+                                movieViewModel.deleteMovieFromWatched(movie.kinopoiskId)
+                            } else {
+                                movieViewModel.insertMovieToWatched(movie)
+                            }
+                        }
+                    )
                     Icon(contentDescription = "", tint = Color.Unspecified, painter = painterResource(R.drawable.icon__3_), modifier = Modifier.clickable {  })
                     Icon(contentDescription = "", tint = Color.Unspecified, painter = painterResource(R.drawable.icon__4_), modifier = Modifier.clickable {  })
                 }
             }
-
-
         }
-
-
-
-
-
 }

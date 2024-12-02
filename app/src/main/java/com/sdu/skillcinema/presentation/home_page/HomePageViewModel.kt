@@ -3,25 +3,29 @@ package com.sdu.skillcinema.presentation.home_page
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sdu.skillcinema.domain.usecase.MovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class HomePageViewModel : ViewModel() {
+@HiltViewModel
+class HomePageViewModel @Inject constructor (
+    private val movieUseCase: MovieUseCase
+) : ViewModel() {
 
     private val _state =  MutableStateFlow(HomePageState())
     val state: StateFlow<HomePageState> = _state
 
-    private val movieUseCase = MovieUseCase()
 
     init {
-        getAllMovies()
+            getAllMovies()
     }
 
     private fun getAllMovies() {
-
         viewModelScope.launch {
+
             _state.value = _state.value.copy(isLoading = true)
 
             try {

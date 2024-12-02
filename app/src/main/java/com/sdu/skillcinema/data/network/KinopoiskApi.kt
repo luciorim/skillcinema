@@ -1,7 +1,6 @@
 package com.sdu.skillcinema.data.network
 
 import com.sdu.skillcinema.common.Constants
-import com.sdu.skillcinema.common.Constants.BASE_URL
 import com.sdu.skillcinema.data.network.dto.CollectionMovieDto
 import com.sdu.skillcinema.domain.model.Actors
 import com.sdu.skillcinema.domain.model.DetailMovie
@@ -9,10 +8,7 @@ import com.sdu.skillcinema.domain.model.Images
 import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.domain.model.SimilarMovies
 import com.sdu.skillcinema.domain.model.Staff
-import com.sdu.skillcinema.domain.model.enums.ImagesType
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
@@ -64,9 +60,4 @@ interface KinopoiskApi {
     ): Images
 
 }
-
-val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .build()
 

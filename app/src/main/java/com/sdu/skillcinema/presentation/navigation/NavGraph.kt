@@ -2,14 +2,14 @@ package com.sdu.skillcinema.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.sdu.skillcinema.presentation.film_page.FilmPageScreen
 import com.sdu.skillcinema.presentation.gallery.GalleryPageScreen
 import com.sdu.skillcinema.presentation.home_page.HomePageScreen
 import com.sdu.skillcinema.presentation.movie_collection.MovieCollectionScreen
+import com.sdu.skillcinema.presentation.profile.screens.ProfileScreen
+import com.sdu.skillcinema.presentation.profile.screens.WatchedMoviesScreen
 import com.sdu.skillcinema.presentation.staff_detail.StaffDetailScreen
 import com.sdu.skillcinema.presentation.staff_detail_movie.StaffDetailMoviesScreen
 import com.sdu.skillcinema.presentation.staff_filmography.StaffFilmographyScreen
@@ -30,7 +30,15 @@ fun NavGraph(
         }
 
         composable("profile") {
-            Profile()
+            ProfileScreen(
+                navController = navHostController
+            )
+        }
+
+        composable ( "watchedMovies" ) {
+            WatchedMoviesScreen(
+                navController = navHostController
+            )
         }
 
         composable("movieCollection/{type}") { backStackEntry ->

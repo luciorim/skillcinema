@@ -21,16 +21,3 @@ fun Search() {
         textAlign = TextAlign.Center
     )
 }
-
-
-@Composable
-fun Profile() {
-    Text (
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentHeight()
-            .background(Color.White),
-        text = "Profile",
-        textAlign = TextAlign.Center
-    )
-}

@@ -6,20 +6,23 @@ import androidx.lifecycle.viewModelScope
 import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.domain.usecase.MovieUseCase
 import com.sdu.skillcinema.domain.usecase.StaffUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class StaffDetailViewModel(
+@HiltViewModel
+class StaffDetailViewModel @Inject constructor(
+    private val movieUseCase: MovieUseCase,
+    private val staffUseCase: StaffUseCase,
     savedStateHandle: SavedStateHandle,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(StaffDetailState())
     val state: StateFlow<StaffDetailState> = _state
 
-    private val staffUseCase = StaffUseCase()
-    private val movieUseCase = MovieUseCase()
 
     init {
         val id: Int? = savedStateHandle.get<String>("staffId")?.toInt()

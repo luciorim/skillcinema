@@ -1,4 +1,4 @@
-package com.sdu.skillcinema.presentation.movie_collection
+package com.sdu.skillcinema.presentation.profile.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +15,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,20 +28,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.sdu.skillcinema.R
-import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
-import com.sdu.skillcinema.domain.model.enums.convertCollectionType
-import com.sdu.skillcinema.presentation.components.MovieItem
+import com.sdu.skillcinema.presentation.profile.components.WatchedMovieItem
+import com.sdu.skillcinema.presentation.profile.viewmodels.WatchedMoviesViewModel
 
 @Composable
-fun MovieCollectionScreen(
+fun WatchedMoviesScreen(
     navController: NavController,
-    viewModel: MovieCollectionViewModel = hiltViewModel()
+    watchedMoviesViewModel: WatchedMoviesViewModel = hiltViewModel()
 ) {
 
-    val state by viewModel.state.collectAsState()
+    val state by watchedMoviesViewModel.watchedMoviesState.collectAsState()
 
     Box (
         modifier = Modifier
@@ -83,17 +82,26 @@ fun MovieCollectionScreen(
                     Text(
                         modifier = Modifier
                             .align(Alignment.Center),
-                        text = convertCollectionType(
-                            state.collectionType ?:
-                            MoviesCollectionType.TOP_250_MOVIES
-                        ),
+                        text = "Просмотрено",
                         style = TextStyle(
                             fontWeight = FontWeight.W600,
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             lineHeight = 13.2.sp,
                             color = Color(0xFF272727)
                         )
                     )
+
+                    TextButton(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd),
+                        onClick = { watchedMoviesViewModel.clear() }
+                    ) {
+                        Text(
+                            text = "Очистить историю",
+                            style = TextStyle(fontSize = 12.sp),
+                            color = Color(0xFF3D3BFF),
+                        )
+                    }
                 }
 
                 LazyVerticalGrid (
@@ -108,16 +116,15 @@ fun MovieCollectionScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(state.movies) { movie ->
-                        MovieItem(
+                        WatchedMovieItem(
                             movie = movie,
-                            onItemClick = {navController.navigate("detailMovie/${movie.kinopoiskId}")}
+                            onItemClick = { navController.navigate("detailMovie/${movie.movieId}}") }
                         )
                     }
                 }
 
             }
-
         }
-
     }
+
 }

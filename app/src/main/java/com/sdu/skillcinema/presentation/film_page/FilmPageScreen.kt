@@ -19,14 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sdu.skillcinema.R
 import com.sdu.skillcinema.domain.model.Actors
-import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.presentation.film_page.components.ActorsList
 import com.sdu.skillcinema.presentation.film_page.components.DetailMovieItem
 import com.sdu.skillcinema.presentation.film_page.components.GalleryListItem
@@ -36,15 +34,13 @@ import com.sdu.skillcinema.presentation.film_page.components.SimilarFilmsListIte
 @Composable
 fun FilmPageScreen(
     navController: NavController,
-    movieViewModel: FilmPageViewModel = viewModel(),
-    actorViewModel: FilmPageViewModel = viewModel(),
-    imageViewModel: FilmPageViewModel = viewModel(),
-    similarMovieViewModel: FilmPageViewModel = viewModel(),
+    movieViewModel: FilmPageViewModel = hiltViewModel(),
 ) {
     val stateMovie by movieViewModel.stateMovie.collectAsState()
-    val stateActor by actorViewModel.stateActors.collectAsState()
-    val stateImage by imageViewModel.stateGallery.collectAsState()
-    val statesimilarMovie by similarMovieViewModel.stateSimilarFilm.collectAsState()
+    val stateActor by movieViewModel.stateActors.collectAsState()
+    val stateImage by movieViewModel.stateGallery.collectAsState()
+    val statesimilarMovie by movieViewModel.stateSimilarFilm.collectAsState()
+    val isWatched by movieViewModel.isWatched.collectAsState()
 
     if ( stateMovie.isLoading ) {
 
@@ -78,7 +74,7 @@ fun FilmPageScreen(
                     ){
                         val mov = stateMovie.movie
                         if (mov != null){
-                            DetailMovieItem(movie = mov)
+                            DetailMovieItem(movie = mov, isWatched, movieViewModel)
                         }
                         IconButton(
                             onClick = { navController.popBackStack() },
@@ -185,11 +181,6 @@ fun FilmPageScreen(
 
                         }
                     }
-
-
-
-
-
                 }
             }
         }
