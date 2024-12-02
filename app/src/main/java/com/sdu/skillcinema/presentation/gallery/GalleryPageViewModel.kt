@@ -10,13 +10,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class GalleryPageViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
+class GalleryPageViewModel @Inject constructor(
+    private val movieUseCase: MovieUseCase,
+    savedStateHandle: SavedStateHandle
+): ViewModel() {
 
     private val _state =  MutableStateFlow(GalleryPageState())
     val state: StateFlow<GalleryPageState> = _state
 
-    private val movieUseCase = MovieUseCase()
 
     init {
         val id: Int? = savedStateHandle.get<String>("id")?.toInt()

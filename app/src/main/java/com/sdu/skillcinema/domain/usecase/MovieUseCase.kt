@@ -8,10 +8,12 @@ import com.sdu.skillcinema.domain.model.Images
 import com.sdu.skillcinema.domain.model.Movie
 import com.sdu.skillcinema.domain.model.SimilarMovies
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
+import com.sdu.skillcinema.domain.repository.MovieRepository
+import javax.inject.Inject
 
-class MovieUseCase {
-
-    private val movieRepository = MovieRepositoryImpl()
+class MovieUseCase @Inject constructor(
+    private val movieRepository: MovieRepository
+){
 
     suspend fun getFilmById(id: Int): Movie {
         return movieRepository.getMovie(id)

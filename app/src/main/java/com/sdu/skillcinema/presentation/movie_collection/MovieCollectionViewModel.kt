@@ -6,19 +6,22 @@ import androidx.lifecycle.viewModelScope
 import com.sdu.skillcinema.domain.model.enums.MoviesCollectionType
 import com.sdu.skillcinema.domain.model.enums.getMoviesCollectionTypeFromString
 import com.sdu.skillcinema.domain.usecase.MovieUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class MovieCollectionViewModel(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class MovieCollectionViewModel @Inject constructor (
+    private val movieUseCase: MovieUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MovieCollectionState())
     val state: StateFlow<MovieCollectionState> = _state
 
-    val movieUseCase = MovieUseCase()
 
     init {
         val typeString = savedStateHandle.get<String>("type")

@@ -26,6 +26,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.sdu.skillcinema.R
@@ -36,7 +37,7 @@ import com.sdu.skillcinema.presentation.components.MovieItem
 @Composable
 fun MovieCollectionScreen(
     navController: NavController,
-    viewModel: MovieCollectionViewModel = viewModel()
+    viewModel: MovieCollectionViewModel = hiltViewModel()
 ) {
 
     val state by viewModel.state.collectAsState()

@@ -1,11 +1,11 @@
 package com.sdu.skillcinema.domain.model
 
 data class Movie(
+    val kinopoiskId: Int,
     val countries: List<Country>,
     val coverUrl: String,
     val description: String,
     val genres: List<Genre>,
-    val kinopoiskId: Int,
     val logoUrl: String,
     val nameEn: String,
     val nameOriginal: String,
